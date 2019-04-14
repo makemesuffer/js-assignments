@@ -17,7 +17,7 @@
  * 4) for numbers which are multiples of both three and five return 'FizzBuzz'
  *
  * @param {number} num
- * @return {any}
+ * @return {string}
  *
  * @example
  *   2 =>  2
@@ -30,7 +30,15 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num % 3 === 0 && num % 5 === 0) {
+        return 'FizzBuzz';
+    } else if (num % 3 === 0) {
+        return 'Fizz';
+    } else if (num % 5 === 0) {
+        return 'Buzz'
+    } else {
+        return num;
+    }
 }
 
 
@@ -46,7 +54,9 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    if (n === 0) return 0;
+    if (n === 1) return 1;
+    return n * getFactorial(n - 1);
 }
 
 
@@ -63,7 +73,11 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let sum = 0;
+    for (let i = n1; i <= n2; i++ ) {
+        sum += i;
+    }
+    return sum;
 }
 
 
@@ -82,7 +96,19 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    const firstSide = Math.pow(a, 2);
+    const secondSide = Math.pow(b, 2);
+    const thirdSide = Math.pow(c, 2);
+
+    if (
+        firstSide + secondSide < thirdSide ||
+        firstSide + thirdSide  < secondSide ||
+        secondSide + thirdSide < firstSide
+    ) {
+        return false;
+    }
+
+    return true;
 }
 
 
@@ -108,7 +134,7 @@ function isTriangle(a,b,c) {
  * 
  * @param {object} rect1
  * @param {object} rect2
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   { top: 0, left: 0, width: 10, height: 10 },
@@ -119,7 +145,10 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    return !(rect2.left > rect1.width ||
+        rect2.width < rect1.left ||
+        rect2.top > rect1.height ||
+        rect2.height < rect1.top);
 }
 
 
@@ -150,7 +179,8 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return Math.pow(circle.center.x - point.x, 2) + Math.pow(circle.center.y - point.y, 2) < circle.radius * circle.radius;
+
 }
 
 
@@ -166,7 +196,17 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    str = str.split('');
+    for (let i = 0; i < str.length; i++) {
+        let temp = str[i];
+        str[i] = '$';
+        if (str.indexOf(temp) < 0) {
+            return temp;
+        }else {
+            str[i] = temp;
+        }
+    }
+    return null;
 }
 
 
@@ -192,7 +232,16 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    let res = '';
+    if (isStartIncluded) res += '[';
+    else res += '(';
+
+    if (a < b) res += `${a}, ${b}`;
+    else res += `${b}, ${a}`;
+
+    if (isEndIncluded) res += ']';
+    else res += ')';
+    return res;
 }
 
 
@@ -209,7 +258,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split('').reverse().join('');
 }
 
 
@@ -226,7 +275,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    return String(num).split('').reverse().join('');
 }
 
 
@@ -270,7 +319,16 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    let res = [];
+    res = String(num).split('').reduce((prev, curr) => {
+        return (+prev) + (+curr);
+    });
+    while (res > 9){
+        res = String(res).split('').reduce((prev, curr) => {
+            return (+prev) + (+curr);
+        });
+    }
+    return res;
 }
 
 
@@ -356,7 +414,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.toString(n);
 }
 
 
